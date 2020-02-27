@@ -2,7 +2,7 @@
 # @Date:   2020-02-25T17:31:20+08:00
 # @Email:  aji.setyoko.second@gmail.com
 # @Last modified by:   simslab-cs
-# @Last modified time: 2020-02-26T20:52:10+08:00
+# @Last modified time: 2020-02-27T12:08:58+08:00
 
 
 
@@ -116,6 +116,7 @@ if __name__ == '__main__':
                         help='if provided, resize heatmaps before they are post-processed. default=1.0')
     parser.add_argument('--roi_cut', type=str,default='unset',
                         help = '0,100,0,200 to detect skeleton from a video frame in rectange area with coordinate 0,0 -> 100,200')
+    parser.add_argument('--stabilz', type = int, default = 0, help = '0 for default 1 using euclidan distance and 2 using detedted coordinate occurence')
     args = parser.parse_args()
 
     #GPU-CPU Setter
@@ -154,20 +155,22 @@ if __name__ == '__main__':
     else:
         roi_cut = args.roi_cut.split(',')
         x0,y0,x1,y1 = int(roi_cut[0]),int(roi_cut[1]),int(roi_cut[2]),int(roi_cut[3])
-    print(x0,y0,x1,y1)
     while cap.isOpened():
         ret_val, image = cap.read()
         if ret_val==True:
             image_ori = image.copy()
             image = image[x0:y0,x1:y1] # ROI Image
-            if i<1:
-                asa = stabilkan(image,0,10)
-            else:
-                dist = asa.distance_calc(image)
-                asa.update(dist,image)
-                image = asa.goodframe
-                # print(dist)
-            # start_pos = [474,551]
+            if args.stabilz == 0:
+                pass
+            elif args.stabilz == 1:
+                if i<1:
+                    asa = stabilkan(image,0,10)
+                else:
+                    dist = asa.distance_calc(image)
+                    asa.update(dist,image)
+                    image = asa.goodframe
+            elif args.stabilz == 2:
+                pass
             start_pos = [x0,x1]
             humans = e.inference(image,resize_to_default=True, upsample_size=6.0)
             image_shape = image.shape[:2]
