@@ -2,7 +2,7 @@
 # @Date:   2020-02-25T17:31:20+08:00
 # @Email:  aji.setyoko.second@gmail.com
 # @Last modified by:   simslab-cs
-# @Last modified time: 2020-02-27T14:28:42+08:00
+# @Last modified time: 2020-02-27T18:35:41+08:00
 
 
 
@@ -100,8 +100,12 @@ if __name__ == '__main__':
             cv2.putText(image1, "FPS: %f" % (1.0 / (time.time() - fps_time)), (10, 10)
                         , cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 4)
 
-            cv2.imshow('frame_1', image1)
-            cv2.imshow('frmae_2', image2)
+            dual_frame_in  = np.concatenate((frame0, frame1), axis=1)
+            dual_frame_out = np.concatenate((image1,image2), axis =1)
+            c = cv2.resize(dual_frame_in,(int(1.5*640),int(1.5*240)))
+            cv2.imshow('frame_1', c)
+            c = cv2.resize(dual_frame_out,(int(1.5*640),int(1.5*240)))
+            cv2.imshow('frmae_2', c)
             fps_time = time.time()
             i +=1
 
