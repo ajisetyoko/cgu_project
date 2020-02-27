@@ -7,17 +7,20 @@ The dependencies of this model is the combination of [1] and [2]. You can direct
 
 #### Program
 - **Coordinate Extraction**
-  - Use to make skeleton detection more accurate and faster by giving the openpose[1] smaller resolution. This is possible if the video frame is too big compare to the object. And the object is not moving.
+  - Use to make skeleton detection more accurate and faster by giving the open-pose[1] smaller resolution. This is possible if the video frame is too big compare to the object. And the object is not moving.
   - `python coordinate_maker.py video.mp4`
-  - the rectangle coordinate shows in terminal which will use manually in openpose
+  - the rectangle coordinate shows in terminal which will use manually in open-pose
   - <img src="info/coordinate_maker.png" width="500">
 
-
-- **Openpose[1]**
-  -
+- **Open-pose[1]**
+  - The open-pose model is modified model from original implementation using tensor-flow framework by ildoonet
+  - Modified list mode:
+    - Dual Camera / Video Source detection
+    - Mini-Stabilizer
+    - Modified Json Output Sequence
 
 #### DEMO
 
 #### Reference
-* [1] CMU-OpenPose :
+* [1] CMU-OpenPose : Deep Pose Estimation implemented using Tensor-flow with Custom Architectures for fast inference. https://github.com/ildoonet/tf-pose-estimation
 * [2] ST-GCN :

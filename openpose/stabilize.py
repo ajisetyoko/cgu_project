@@ -2,7 +2,7 @@
 # @Date:   2020-02-25T17:31:20+08:00
 # @Email:  aji.setyoko.second@gmail.com
 # @Last modified by:   simslab-cs
-# @Last modified time: 2020-02-26T19:19:57+08:00
+# @Last modified time: 2020-02-27T12:11:12+08:00
 
 
 
@@ -32,7 +32,7 @@ class stabilkan:
     def update(self,dist,new_image):
         if dist<self.dist_thres:
             pass
-            # print('Image is same')
+            # print('Image same')
             # self.goodframe = new_image
         else:
             # update self.goodframe
